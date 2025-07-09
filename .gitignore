@@ -1,0 +1,55 @@
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor & IDE settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS swap/backup files
+*.swp
+*.bak
+*.tmp
+
+# Coverage reports
+coverage/
+
+# Vite cache
+.vite/
+
+# Mac metadata files
+._*
+
+# Optional: Firebase/hosting artifacts
+.firebase/
+.firebaserc
+
+# Optional: if using JetBrains IDEs
+*.iml
+out/
+
+# Optional: React Native junk (if ever used)
+.expo/
+.expo-shared/
