@@ -5,7 +5,7 @@ import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
-import { uiActions } from "./store/ui-slice";
+import { sendCartData } from "./store/cart-slice";
 
 let INITIAL_REQUEST = true;
 
@@ -17,35 +17,6 @@ function App() {
   const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
-    const updatingCartDb = async () => {
-      dispatch(
-        uiActions.showNotification({
-          status: "pending",
-          title: "sending...!",
-          message: "sending cart data",
-        })
-      );
-
-      const response = await fetch(
-        "https://advanced-redux-4da17-default-rtdb.europe-west1.firebasedatabase.app/cart.json",
-        {
-          method: "PUT",
-          body: JSON.stringify(cart),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Sending cart data faild");
-      }
-
-      dispatch(
-        uiActions.showNotification({
-          status: "success",
-          title: "Success",
-          message: "sending cart data successfully",
-        })
-      );
-    };
     // preventing the initial data fetch sent when component mounts before declaring our
     //updatingCartDb() function
     if (INITIAL_REQUEST) {
@@ -53,15 +24,9 @@ function App() {
       return;
     }
 
-    updatingCartDb().catch((error) => {
-      dispatch(
-        uiActions.showNotification({
-          status: "error",
-          title: "Error",
-          message: "sending cart data failed",
-        })
-      );
-    });
+    // using the action function we created in the cart-slice file (sendCartData) inside a
+    // dispatch() to both update Db and store
+    dispatch(sendCartData(cart));
   }, [cart]);
   return (
     <>
